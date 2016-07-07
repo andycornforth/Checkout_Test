@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Shopping List API</h1>
+    <h2>Now running</h2>
+    <h3>Checkout.com</h3>
+
+    <p>
+        <ul>
+            <li>
+                Post
+            </li>
+            <li>
+                Put
+            </li>
+            <li>
+                Delete
+            </li>
+            <li>
+                Get
+            </li>
+            <li>
+                GetList
+            </li>
+        </ul>
+    </p>
+
+    <p>URI:</p>
+    api/item/<input type="text" id="request" size="5" style="width:300px; font-size:2em;" />
+    <input type="button" value="Go" onclick="find();" style="font-size:2em;" />
+
+    <p>Post:</p>
+    <textarea id="postArea" rows="3" cols="40"></textarea>
+
+    <p>Response:</p>
+    <div>
+        <p id="response" style="font-size:2em;" />
+    </div>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        function find() {
+            var postAreaValue = $('#postArea').val();
+            var request = $('#request').val();
+            if (postAreaValue == undefined || postAreaValue == "") {
+                $.getJSON('api/item/' + request)
+                    .done(function (data) {data.textStatus
+                    $('#response').text(formatItem(data));
+                    })
+                    .fail(function (jqXHR, textStatus, err) {
+                        $('#response').text('Error: ' + err);
+                    });
+            } else {
+                $.ajax({
+                    type: "POST",
+                    data: postAreaValue,
+                    url: "api/item/" + request,
+                    contentType: "application/json"
+                });
+            }
+        }
+        function formatItem(item) {
+            return JSON.stringify(item);
+        }
+    </script>
+</body>
+</html>

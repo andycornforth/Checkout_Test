@@ -16,7 +16,8 @@ namespace ShoppingListAPI
 
             // e.g. container.RegisterType<ITestService, TestService>();    
                     
-            container.RegisterType<IItemRepository, InMemoryItemRepository>();
+            var itemRepository = new InMemoryItemRepository();
+            container.RegisterInstance<IItemRepository>(itemRepository);
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
 

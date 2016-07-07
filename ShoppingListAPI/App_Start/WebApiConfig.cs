@@ -19,6 +19,36 @@ namespace ShoppingListAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+               name: "Post",
+               routeTemplate: "api/{controller}/Post/{name}/{quantity}",
+               defaults: new { controller = "Item", action = "Post" }
+           );
+
+            config.Routes.MapHttpRoute(
+                name: "Put",
+                routeTemplate: "api/{controller}/Put/{name}/{quantity}",
+                defaults: new { controller = "Item", action = "Put" }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "Delete",
+                routeTemplate: "api/{controller}/Delete/{name}",
+                defaults: new { controller = "Item", action = "Delete" }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "Get",
+                routeTemplate: "api/{controller}/Get/{name}",
+                defaults: new { controller = "Item", action = "Get" }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "GetList",
+                routeTemplate: "api/{controller}/GetList",
+                defaults: new { controller = "Item", action = "GetList" }
+            );
         }
     }
 }

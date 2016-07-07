@@ -39,6 +39,7 @@ namespace ShoppingListAPI.Controllers
             return Ok();
         }
 
+        [HttpDelete]
         public IHttpActionResult Delete(string name)
         {
             if (name == null || name.Equals(string.Empty))
@@ -48,6 +49,7 @@ namespace ShoppingListAPI.Controllers
             return Ok();
         }
 
+        [HttpGet]
         public IHttpActionResult Get(string name)
         {
             if (name == null || name.Equals(string.Empty))
@@ -61,6 +63,7 @@ namespace ShoppingListAPI.Controllers
             return Ok(ItemMapper.RepositoryToAPI(item));
         }
 
+        [HttpGet]
         public IHttpActionResult GetList() => Ok(ItemMapper.RepositoryListToAPIList(_itemRepository.GetList()));
 
     }
