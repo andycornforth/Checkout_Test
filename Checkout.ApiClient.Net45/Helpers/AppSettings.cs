@@ -21,6 +21,7 @@ namespace Checkout
         private const string _sandboxUrl = "https://sandbox.checkout.com/api2/v2";
         public const string ClientUserAgentName = "Checkout-DotNetLibraryClient/v1.0";
         public const string DefaultContentType = "application/json";
+        public static string _shoppingListUrl = "http://localhost:9810/api/item";
 
         public static string BaseApiUri
         {
@@ -38,33 +39,41 @@ namespace Checkout
             set { _publicKey = value; }
         }
 
+        public static string ShoppingListApiUri
+        {
+            get { return _shoppingListUrl; }
+            set { _shoppingListUrl = value; }
+        }
+
         public static int RequestTimeout
         {
             get
             {
                 if (_requestTimeout == null)
                 {
-                   var value = ReadConfig("Checkout.RequestTimeout");
-                   _requestTimeout = (!string.IsNullOrEmpty(value) ? int.Parse(value) : 60);
+                    var value = ReadConfig("Checkout.RequestTimeout");
+                    _requestTimeout = (!string.IsNullOrEmpty(value) ? int.Parse(value) : 60);
                 }
 
                 return _requestTimeout.Value;
             }
             set { _requestTimeout = value; }
         }
-        public static int MaxResponseContentBufferSize { 
-            get { 
-                
-                 if (_maxResponseContentBufferSize == null)
+        public static int MaxResponseContentBufferSize
+        {
+            get
+            {
+
+                if (_maxResponseContentBufferSize == null)
                 {
-                   var value = ReadConfig("Checkout.MaxResponseContentBufferSize");
-                   _maxResponseContentBufferSize = (!string.IsNullOrEmpty(value) ? int.Parse(value) : 1000000);
+                    var value = ReadConfig("Checkout.MaxResponseContentBufferSize");
+                    _maxResponseContentBufferSize = (!string.IsNullOrEmpty(value) ? int.Parse(value) : 1000000);
                 }
 
-                return _maxResponseContentBufferSize.Value; 
+                return _maxResponseContentBufferSize.Value;
             }
 
-            set { _maxResponseContentBufferSize = value; } 
+            set { _maxResponseContentBufferSize = value; }
         }
         public static bool DebugMode
         {
@@ -113,7 +122,7 @@ namespace Checkout
             { throw new KeyNotFoundException("Config value is invalid for: Environment"); }
         }
 
-        private static string ReadConfig(string key,bool throwIfnotExist=false)
+        private static string ReadConfig(string key, bool throwIfnotExist = false)
         {
             try
             {

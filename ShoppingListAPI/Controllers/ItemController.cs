@@ -2,6 +2,8 @@
 using ShoppingListAPI.Models;
 using Repository;
 using ShoppingListAPI.Helpers;
+using System.Net.Http;
+using System;
 
 namespace ShoppingListAPI.Controllers
 {
@@ -21,17 +23,17 @@ namespace ShoppingListAPI.Controllers
                 return BadRequest();
 
             _itemRepository.AddItem(ItemMapper.APIToRepository(item));
-            return Ok();
+            return Ok(item);
         }
 
         [HttpPut]
-        public IHttpActionResult Put(string name, int quantity)
+        public IHttpActionResult Put(Item item)
         {
-            if (name == null || name.Equals(string.Empty) || quantity < 0)
+            if (item == null || item.Name == null || item.Name.Equals(string.Empty) || item.Quantity < 0)
                 return BadRequest();
 
-            _itemRepository.UpdateItem(name, quantity);
-            return Ok();
+            _itemRepository.UpdateItem(item.Name, item.Quantity);
+            return Ok(item);
         }
 
         [HttpDelete]
@@ -41,7 +43,7 @@ namespace ShoppingListAPI.Controllers
                 return BadRequest();
 
             _itemRepository.DeleteItem(name);
-            return Ok();
+            return Ok(name);
         }
 
         [HttpGet]
@@ -60,5 +62,12 @@ namespace ShoppingListAPI.Controllers
 
         [HttpGet]
         public IHttpActionResult GetList() => Ok(ItemMapper.RepositoryListToAPIList(_itemRepository.GetList()));
+
+        [HttpGet]
+        public IHttpActionResult ClearList()
+        {
+            _itemRepository.ClearList();
+            return Ok();
+        }
     }
 }

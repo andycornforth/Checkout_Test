@@ -1,6 +1,7 @@
 ﻿using Repository.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Repository
 {
@@ -19,6 +20,11 @@ namespace Repository
                 _list.Add(item);
             else
                 UpdateItem(item.Name, item.Quantity + _list.Where(x => x.Name == item.Name).FirstOrDefault().Quantity);
+        }
+
+        public void ClearList()
+        {
+            _list.Clear();
         }
 
         public void DeleteItem(string name) => _list.RemoveAll(x => x.Name == name);

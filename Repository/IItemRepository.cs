@@ -10,5 +10,6 @@ namespace Repository
         Item GetItem(string name);
         void DeleteItem(string name);
         void UpdateItem(string name, int quantity);
+        void ClearList();
     }
 }
