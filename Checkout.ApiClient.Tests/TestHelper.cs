@@ -619,6 +619,19 @@ namespace Tests
 
         #endregion
 
+        #region Shopping List Helpers
+
+        public static Product CreateTestProduct(string name, int quantity)
+        {
+            return new Product()
+            {
+                Name = name,
+                Quantity = quantity
+            };
+        }
+
+        #endregion
+
         /// <summary>
         /// Masks a card number to query transactions
         /// eg: 4242424242424242 -> 424242******4242

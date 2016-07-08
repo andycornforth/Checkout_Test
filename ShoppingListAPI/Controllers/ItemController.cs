@@ -43,7 +43,7 @@ namespace ShoppingListAPI.Controllers
                 return BadRequest();
 
             _itemRepository.DeleteItem(name);
-            return Ok(name);
+            return Ok(new StringContent($"{name} deleted."));
         }
 
         [HttpGet]
