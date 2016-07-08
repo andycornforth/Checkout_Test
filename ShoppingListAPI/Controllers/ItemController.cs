@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
 using ShoppingListAPI.Models;
 using Repository;
 using ShoppingListAPI.Helpers;
@@ -65,6 +60,5 @@ namespace ShoppingListAPI.Controllers
 
         [HttpGet]
         public IHttpActionResult GetList() => Ok(ItemMapper.RepositoryListToAPIList(_itemRepository.GetList()));
-
     }
 }
